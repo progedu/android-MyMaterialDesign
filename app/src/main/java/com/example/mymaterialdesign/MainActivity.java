@@ -1,13 +1,13 @@
 package com.example.mymaterialdesign;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
+import android.transition.Explode;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,5 +45,14 @@ public class MainActivity extends AppCompatActivity {
     public void addItem(View view) {
         listItem.add(0, "Added Item" + System.currentTimeMillis());
         mAdapter.notifyItemRangeChanged(0, listItem.size());
+    }
+
+    public void transition(View view) {
+        // set an exit transition
+        getWindow().setExitTransition(new Explode());
+
+        startActivity(new Intent(this, SubActivity.class),
+                ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+
     }
 }
